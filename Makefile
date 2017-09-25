@@ -82,19 +82,19 @@ release: req-release-type req-release-repo clean ## package and upload a release
 	release -t $(RELEASE_TYPE) -g $(RELEASE_REPO) $(RELEASE_BRANCH) $(RELEASE_BASE)
 
 req-publish-registry:
-	ifndef PUBLISH_REGISTRY
-		$(error PUBLISH_REGISTRY is undefined)
-	endif
+ifndef PUBLISH_REGISTRY
+	$(error PUBLISH_REGISTRY is undefined)
+endif
 
 req-release-type:
-	ifndef RELEASE_TYPE
-		$(error RELEASE_TYPE is undefined)
-	endif
+ifndef RELEASE_TYPE
+	$(error RELEASE_TYPE is undefined)
+endif
 
 req-release-repo:
-	ifndef RELEASE_REPO
-		$(error RELEASE_REPO is undefined)
-	endif
+ifndef RELEASE_REPO
+	$(error RELEASE_REPO is undefined)
+endif
 
 test: ## run tests quickly with the default Python
 	python setup.py test

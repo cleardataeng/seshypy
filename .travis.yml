@@ -1,0 +1,20 @@
+language: python
+python:
+  - '2.7'
+  - '3.3'
+  - '3.4'
+  - '3.5'
+install:
+  - pip install .
+  - pip install -r requirements_dev.txt
+script:
+  - python setup.py test
+  - make lint
+deploy:
+  provider: pypi
+  user: cleardataeng
+  password:
+    secure: bWZxPYHsJi7zXa+XDpQNKfFmDGpyp6wTwEVeSre7mKUejOJiq5CkTh32KkApi7PWgDENoUVRBXco1nw3kt9kp0oiuJT/H3mkFuvCR56JvSgtsCANupWcu1+cKgoNCoeylpIi9aUx1q5DnNEyAINBAT0VCdutruzroVJUI+vWFZNaChItQug9fO/r/l48bMJPzYjAOKkYALu6iYKqtBG41MnFe+23rGWE/Mkq3jS9LzTdKZ+seknWY5lbPFA95r12u3GUuLUkN7z8u2Dy2XZvOG2DjTlCmz+K4wzZr9RAMQBcbGbUNoerGHGk1YwiFp91hD/fY9t81gmfQHeG9frdGkUB/7zH68hA23Suh9jU/f+Wbnir8DA8hz5EV01IFdxxUBjv/Zwt67Xx2/jzZuM1FWpirhZ5MCh5pznon2iRjlhj22RxKkb86j5Z/DC0zZf2w0C9hLxaJ0TYSFi5itdxTTrGuw4GvqdINWyubSzLyvHQZf9GwrFZm7A8JwY4d4ik61fZplApbN4e6+4N5o7uMw/H86A9XeJxkSf+B/LiBFBerWzwWz6/GWiAIqW1SKJMBghRhtoBYzwTyUqMWlpBF8zH6eowG9p/cpr82flXO6mPW4FcjBKxiNj+vY8/SfS1jdIdrDXyC253LXcqnwACeXIx6AfN7t6XjCd3MNDwBlk=
+  on:
+    tags: true
+    branch: master

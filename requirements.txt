@@ -1,0 +1,7 @@
+awsrequests==0.0.12
+boto3==1.4.7
+cachetools==2.0.1
+figgypy==1.1.7
+future==0.16.0
+requests==2.18.4
+retrying==1.3.3

@@ -1,1 +1,2 @@
-VERSION = '0.5.0'
+"""Package version will be written by setup.py."""
+VERSION = 'undefined'

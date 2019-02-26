@@ -3,7 +3,7 @@ import logging
 try:
     from urllib.parse import urlencode
     from urllib.parse import urljoin
-except ImportError: # Python 2
+except ImportError:  # Python 2
     from urllib import urlencode
     from urlparse import urljoin
 
@@ -54,6 +54,7 @@ class BaseSession(object):
     .. _cachetools:
         http://pythonhosted.org/cachetools/
     """
+
     def __init__(self, host, role_arn=None, aws_access_key_id=None,
                  aws_secret_access_key=None, region=None, session=None,
                  use_cache=True, cache_ttl=1200, cache_methods=None):
@@ -63,8 +64,11 @@ class BaseSession(object):
             'Content-type': 'application/json',
         }
         if not session:
-            session = Session(role_arn=role_arn, aws_access_key_id=aws_access_key_id,
-                              aws_secret_access_key=aws_secret_access_key, region=region)
+            session = Session(
+                role_arn=role_arn,
+                aws_access_key_id=aws_access_key_id,
+                aws_secret_access_key=aws_secret_access_key,
+                region=region)
         self.session = session
         self.__use_cache = bool(use_cache)
         self.__cache_ttl = cache_ttl
@@ -87,7 +91,8 @@ class BaseSession(object):
             try:
                 return not inspect.isfunction(method.cache_info)
             except AttributeError:
-                setattr(self, method_name, safe_ttl_cache(ttl=self.cache_ttl)(method))
+                setattr(self, method_name, safe_ttl_cache(
+                    ttl=self.cache_ttl)(method))
                 return True
         except AttributeError:
             # method doesn't exist on initializing class
@@ -133,11 +138,13 @@ class BaseSession(object):
         url = urljoin(host, path)
         try:
             if method == 'POST':
-                res = req.post(url, headers=headers, json=payload, params=params)
+                res = req.post(url, headers=headers,
+                               json=payload, params=params)
             elif method == 'GET':
                 res = req.get(url, headers=headers, params=params)
             elif method == 'PUT':
-                res = req.put(url, headers=headers, params=params, json=payload)
+                res = req.put(url, headers=headers,
+                              params=params, json=payload)
             elif method == 'DELETE':
                 res = req.delete(url, headers=headers)
             else:
@@ -243,7 +250,8 @@ class BaseSession(object):
             }
             session.api_retrying(**retrying_kwargs)
         """
-        self.make_api_gateway_call = retry(*args, **kwargs)(self.make_api_gateway_call)
+        self.make_api_gateway_call = retry(
+            *args, **kwargs)(self.make_api_gateway_call)
 
     def __enter__(self):
         return self

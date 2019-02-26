@@ -11,7 +11,7 @@ with open('README.rst') as readme_file:
     readme = readme_file.read()
 
 install_requires = [
-    'awsrequests>=0.0.5',
+    'requests-sigv4>=0.1.0',
     'cachetools>=1.1.6',
     'figgypy>=0.2.0',
     'future',
@@ -30,6 +30,6 @@ setup(
     install_requires=install_requires,
     setup_requires=['pytest-runner'],
     tests_require=[
-        'pytest'
+        'pytest', 'freezegun'
     ]
 )

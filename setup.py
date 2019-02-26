@@ -15,7 +15,7 @@ install_requires = [
     'cachetools>=1.1.6',
     'figgypy>=0.2.0',
     'future',
-    'requests>=2.7.0',
+    'requests>=2.21.0',
     'retrying>=1.3.3',
     'setuptools>=36.5.0'
 ]

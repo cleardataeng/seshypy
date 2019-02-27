@@ -11,7 +11,7 @@ with open('README.rst') as readme_file:
     readme = readme_file.read()
 
 install_requires = [
-    'requests-sigv4>=0.1.0',
+    'requests-sigv4>=0.1.4',
     'cachetools>=1.1.6',
     'figgypy>=0.2.0',
     'future',

@@ -17,7 +17,7 @@ install_requires = [
     'future',
     'requests>=2.21.0',
     'retrying>=1.3.3',
-    'setuptools>=36.5.0'
+    'setuptools'
 ]
 
 setup(

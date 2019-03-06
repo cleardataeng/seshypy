@@ -17,7 +17,7 @@ install_requires = [
     'future',
     'requests>=2.21.0',
     'retrying>=1.3.3',
-    'setuptools'
+    'setuptools>=36.5.0'
 ]
 
 setup(
@@ -30,6 +30,7 @@ setup(
     install_requires=install_requires,
     setup_requires=['pytest-runner'],
     tests_require=[
-        'pytest', 'freezegun'
+        'pytest',
+        'freezegun',
     ]
 )

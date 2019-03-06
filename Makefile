@@ -98,3 +98,6 @@ endif
 
 test: ## run tests quickly with the default Python
 	python setup.py test
+
+tox:
+	tox -p 2 -o

@@ -42,7 +42,7 @@ class TestBaseSession(unittest.TestCase):
         res = session.get(
             path='/get',
         )
-        got = json.loads(res.content)
+        got = json.loads(str(res.content))
         got.pop('origin', None)
         assert got == want
 

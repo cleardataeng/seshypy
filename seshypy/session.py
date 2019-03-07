@@ -87,9 +87,9 @@ class Session(object):
     def _verify_resolved(self):
         """Verify or update resolved credentials."""
         if (
-            self.resolved
-            and self.resolved is RefreshableCredentials
-            and self.resolved.refresh_needed()
+            self.resolved and
+            self.resolved is RefreshableCredentials and
+            self.resolved.refresh_needed()
         ):
             self._resolve()
 

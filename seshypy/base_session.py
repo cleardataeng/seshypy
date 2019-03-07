@@ -91,8 +91,9 @@ class BaseSession(object):
             try:
                 return not inspect.isfunction(method.cache_info)
             except AttributeError:
-                setattr(self, method_name, safe_ttl_cache(
-                    ttl=self.cache_ttl)(method))
+                setattr(
+                    self, method_name,
+                    safe_ttl_cache(ttl=self.cache_ttl)(method))
                 return True
         except AttributeError:
             # method doesn't exist on initializing class

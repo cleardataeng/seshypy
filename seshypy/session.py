@@ -186,8 +186,7 @@ class Session(object):
                 service = method.__self__.__class__.__name__.lower()
                 client = self.__client(service)
             except UnknownServiceError:
-                service = method.__self__.__class__.__name__.split('.')[
-                    0].lower()
+                service = method.__self__.__class__.__name__.split('.')[0].lower()
                 resource = self.__resource(service)
             try:
                 return getattr(client, method.__name__)(*args, **kwargs)

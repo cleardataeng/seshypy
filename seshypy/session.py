@@ -1,9 +1,8 @@
 from datetime import datetime, timedelta
 import functools
 import inspect
-import logging
 
-from awsrequests import AwsRequester
+from requests_sigv4 import Sigv4Request
 import boto3
 import botocore
 from botocore.credentials import RefreshableCredentials
@@ -13,11 +12,16 @@ from dateutil.tz import tzutc
 
 class Session(object):
     """AWS Session for CMDB access."""
-    def __init__(self, role_arn=None, aws_access_key_id=None,
-                 aws_secret_access_key=None, region=None):
+
+    def __init__(
+        self,
+        role_arn=None,
+        aws_access_key_id=None,
+        aws_secret_access_key=None,
+        region=None,
+    ):
         self.region = region
         self.role_arn = role_arn
-
         self.assumed = None
         self.passed = None
         self.resolved = None
@@ -25,7 +29,8 @@ class Session(object):
             self.passed = {'access_key': aws_access_key_id,
                            'secret_key': aws_secret_access_key}
         elif any([aws_access_key_id, aws_secret_access_key]):
-            raise ValueError('must provide both aws_access_key_id and aws_secret_key or neither')
+            raise ValueError(
+                'must provide both aws_access_key_id and aws_secret_key or neither')
         else:
             self._resolve()
 
@@ -81,9 +86,12 @@ class Session(object):
 
     def _verify_resolved(self):
         """Verify or update resolved credentials."""
-        if self.resolved:
-            if (self.resolved is RefreshableCredentials) and self.resolved.refresh_needed():
-                self._resolve()
+        if (
+            self.resolved and
+            self.resolved is RefreshableCredentials and
+            self.resolved.refresh_needed()
+        ):
+            self._resolve()
 
     def requests(self):
         """Return requester for other sessions."""
@@ -92,20 +100,22 @@ class Session(object):
         if self.assumed:
             reset_time = datetime.now(tz=tzutc()) + timedelta(seconds=30)
             if self.assumed['Credentials']['Expiration'] < reset_time:
-
                 self.assumed = self._assume_role()
+
             kwargs['access_key'] = self.assumed['Credentials']['AccessKeyId']
             kwargs['secret_key'] = self.assumed['Credentials']['SecretAccessKey']
             kwargs['session_token'] = self.assumed['Credentials']['SessionToken']
             kwargs['session_expires'] = self.assumed['Credentials']['Expiration']
-            return AwsRequester(**kwargs)
+            return Sigv4Request(**kwargs)
+
         kwargs['access_key'] = (self.passed['access_key']
                                 if self.passed else self.resolved.access_key)
         kwargs['secret_key'] = (self.passed['secret_key']
                                 if self.passed else self.resolved.secret_key)
         if self.resolved:
             kwargs['session_token'] = self.resolved.token
-        return AwsRequester(**kwargs)
+
+        return Sigv4Request(**kwargs)
 
     def __boto3_kwargs(self):
         """Get boto3 client or resource kwargs."""
@@ -119,6 +129,7 @@ class Session(object):
             kwargs['aws_secret_access_key'] = self.assumed['Credentials']['SecretAccessKey']
             kwargs['aws_session_token'] = self.assumed['Credentials']['SessionToken']
             return kwargs
+
         kwargs['aws_access_key_id'] = (
             self.passed['access_key']
             if self.passed else self.resolved.access_key

@@ -1,19 +1,32 @@
 language: python
-python:
-  - '2.7'
-  - '3.3'
-  - '3.4'
-  - '3.5'
+matrix:
+  include:
+    - python: 2.7
+    - python: 3.4
+    - python: 3.5
+    - python: 3.6
+    - python: 3.7
+      dist: xenial
+      sudo: true
 install:
   - pip install .
   - pip install -r requirements_dev.txt
 script:
   - python setup.py test
 deploy:
-  provider: pypi
-  user: cleardataeng
-  password:
-    secure: JSOx9ZOXWmXrP1NvaSVZUB1OeEy93f5jOctj0hdG0mitB3eKCGCeHZN4XHHwNGd3gvFzAod9Q6ZZjC+JB/ccVwVP6wDL4y8QauxlAQLUxsAWv6Vs0fR4SX+Kf8C9pYcVVxQWEXRxW+Tq7x56UzyTGBCIsSdMsw0PJ9XeZXBJrbfmAO0NrrZOQ5U8SVEpaiYjshM3SE+UNwlFuwdfw5xvchUUPF8b4NZdVSjmbtVt88VgrwnkQI5r0DG347cPcj7D+x/+jQpvTn7QkBvLOGQLuJP9OwUbJBYm6vupZAYDZR0XNodOLjBbu2hbDWELKiirG5gzg+vbnFnD84A4P1vYE6tfatpepkfLaqdl26fIMeDUuFB+WuxAuN9ID311JeY1Np+6FIi0qbbOBv2ROOt3mV1Ul7W0EBmEfg8N1ja77c7jnfBsGgMn+1l0wXX0Vbo1oAb5QyFjoAynh0Y0Eegcm3eW2tc/nij75G1SAWzC2gl5l9xxBpmy7pCX1YihxbAnzDU9MYZxPMa6PZEgSkrqePSAIVNVCncoJtpxSTPRjT7Nz4rAdFseQDidL98HfQYf0FPRRfeEuAF3EgXC0vv9hafXJyVtlGXbJEqWebRM3DHE9gGBr9g/6rGV2TGEjsIkgRsI2LlxqLEP6V9a7d+wwisWgzP6N/D7GMjL60rIrRI=
-  on:
-    tags: true
-    branch: master
+  - provider: pypi
+    user: cleardataeng
+    password:
+        secure: JSOx9ZOXWmXrP1NvaSVZUB1OeEy93f5jOctj0hdG0mitB3eKCGCeHZN4XHHwNGd3gvFzAod9Q6ZZjC+JB/ccVwVP6wDL4y8QauxlAQLUxsAWv6Vs0fR4SX+Kf8C9pYcVVxQWEXRxW+Tq7x56UzyTGBCIsSdMsw0PJ9XeZXBJrbfmAO0NrrZOQ5U8SVEpaiYjshM3SE+UNwlFuwdfw5xvchUUPF8b4NZdVSjmbtVt88VgrwnkQI5r0DG347cPcj7D+x/+jQpvTn7QkBvLOGQLuJP9OwUbJBYm6vupZAYDZR0XNodOLjBbu2hbDWELKiirG5gzg+vbnFnD84A4P1vYE6tfatpepkfLaqdl26fIMeDUuFB+WuxAuN9ID311JeY1Np+6FIi0qbbOBv2ROOt3mV1Ul7W0EBmEfg8N1ja77c7jnfBsGgMn+1l0wXX0Vbo1oAb5QyFjoAynh0Y0Eegcm3eW2tc/nij75G1SAWzC2gl5l9xxBpmy7pCX1YihxbAnzDU9MYZxPMa6PZEgSkrqePSAIVNVCncoJtpxSTPRjT7Nz4rAdFseQDidL98HfQYf0FPRRfeEuAF3EgXC0vv9hafXJyVtlGXbJEqWebRM3DHE9gGBr9g/6rGV2TGEjsIkgRsI2LlxqLEP6V9a7d+wwisWgzP6N/D7GMjL60rIrRI=
+    skip_existing: true
+    on:
+        tags: true
+        branch: master
+  - provider: pypi
+    user: cleardataeng
+    server: https://test.pypi.org/legacy/
+    password:
+        secure: HcSgr1qhHeCsNqmT3pfcK8iQfhasUvYKyDo5xXyuE9MXb7sXcpBlZ3Z7VLpzopTKqgkEUSOIihaK/e3sFrWH8HhxLD3sQOyETwO5hfLq0yAE2SqNAedkNR3V3tc1T0YdKqm2c5CqixdGw2zgzvVmkjDbZErU7TRuIAsErLp0kQI6tKJJMr0lbAhF5dj4N8TCp9CSpCKUs5Ax/o/vqloAsKSyh73OLNRz53nr6qxAazednmSY/fR1211Q7nEGwf03vWOF7YfR9muWDJDQZbw48lg6pgylt7dxBHuygmXxBl/m1b7m3r9uWCpsssAU5tojYh8PDkRfP/u6uSjtUheXVoCydiOuP2vlWvNPkaAWyDqYoiLJW5l/M7slgaKNnbYB3PzuVx1vUmThb8p1L36bUQ0/fohn/npHzScXNVMhI1iKYpnrTr00poBck/iugR5oNky/UUUZLY9yRiBkFCeVIgZNsWb/xpua4piunq+ChmL/+h7KUQ78YkmU2xpV+wLbrPXgP00ZQpNSB3vWSZ7IhHC9TGUNzCr6uke+cxjyJjNWh/f7lGH+ur9ZL7t8P2n+BGmkJee3kV2bY6jFsTJN0DYM8F1TCPGrnvtg0AiUTI93zPMgcV4J/IRYdsKcKQhHL4hCdpKZyQrhkfvu7dsPxz9n/Hqfbh8wPPZ51DtK2tc=
+    skip_existing: true
+    on:
+        branch: develop

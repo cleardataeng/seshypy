@@ -5,6 +5,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
+.pytest_cache/
 
 # C extensions
 *.so
@@ -80,6 +81,7 @@ celerybeat-schedule
 
 # dotenv
 .env
+.env*
 
 # virtualenv
 venv/
@@ -90,3 +92,9 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# VS Code
+.vscode/
+
+# integration tests
+tests/*_int.py

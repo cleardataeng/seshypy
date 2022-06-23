@@ -31,6 +31,7 @@ def safe_ttl_cache(*args, **kwargs):
     """
     def func_wrapper(method):
         ttl_method = ttl_cache(*args, **kwargs)(method)
+
         @functools.wraps(ttl_method)
         def wrapped(*in_args, **in_kwargs):
             try:

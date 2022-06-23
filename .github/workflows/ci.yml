@@ -86,7 +86,7 @@ jobs:
         if: |
           needs.version-changes.outputs.version_changes == 'true'
         with:
-          user: ${{ secrests.PYPI_USERNAME }}
+          user: ${{ secrets.PYPI_USERNAME }}
           password: ${{ secrets.PYPI_PASSWORD }}
           repository_url: https://test.pypi.org/legacy/
 

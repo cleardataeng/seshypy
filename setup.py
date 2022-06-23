@@ -16,7 +16,7 @@ install_requires = [
 
 setup(
     name='seshypy',
-    version='0.6.0',
+    version='0.6.1',
     description='seshypy makes API Gateway requests and API Gateway clients easy.',
     long_description=readme,
     packages=find_packages(),

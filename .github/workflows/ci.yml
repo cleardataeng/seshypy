@@ -59,11 +59,11 @@ jobs:
                 - 'VERSION'
       - name: Version changed
         if: steps.filter.outputs.version == 'true'
-        run: echo "Setup.py changed, need to republish distributions"
+        run: echo "Version changed, need to republish distributions"
 
       - name: Version didn't change
         if: steps.filter.outputs.version != 'true'
-        run: echo "Setup.py didn't change, no distribution publishing"
+        run: echo "Version didn't change, no distribution publishing"
 
   build-and-publish:
     name: TestPyPI - Build and publish Python distributions

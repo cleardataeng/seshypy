@@ -42,6 +42,7 @@ jobs:
   build-and-publish:
     name: TestPyPI - Build and publish Python distributions
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     needs: [pytest]
     steps:
 

@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install Requirements
-        run: pip install -r requirements-dev.txt
+        run: pip install -r requirements_dev.txt
 
       - name: Run linter
         run: flake8 seshypy/ tests/
@@ -33,7 +33,7 @@ jobs:
 
       - name: Install Requirements
         run: |
-          pip install -r requirements-dev.txt
+          pip install -r requirements_dev.txt
           pip install tox
 
       - name: Run tests
@@ -86,7 +86,7 @@ jobs:
         if: |
           needs.version-changes.outputs.version_changes == 'true'
         with:
-          user: ${{ secrests.PYPI_USERNAME }}
+          user: ${{ secrets.PYPI_USERNAME }}
           password: ${{ secrets.PYPI_PASSWORD }}
           repository_url: https://test.pypi.org/legacy/
 

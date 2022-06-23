@@ -56,7 +56,7 @@ jobs:
         with:
             filters: |
               version:
-                - 'VERSION'
+                - 'setup.py'
       - name: Version changed
         if: steps.filter.outputs.version == 'true'
         run: echo "Version changed, need to republish distributions"

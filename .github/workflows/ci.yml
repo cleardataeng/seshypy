@@ -54,9 +54,11 @@ jobs:
         uses: dorny/paths-filter@v2
         id: filter
         with:
-            filters: |
-              version:
-                - 'setup.py'
+          base: develop
+          filters: |
+            version:
+              - 'setup.py'
+
       - name: Version changed
         if: steps.filter.outputs.version == 'true'
         run: echo "Version changed, need to republish distributions"

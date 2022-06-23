@@ -28,11 +28,6 @@ setup(
     packages=find_packages(),
     platforms=['all'],
     install_requires=install_requires,
-    setup_requires=['pytest-runner'],
-    tests_require=[
-        'pytest',
-        'freezegun',
-    ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',

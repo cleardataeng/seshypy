@@ -8,11 +8,12 @@ matrix:
     - python: 3.7
       dist: xenial
       sudo: true
+    - python: 3.8
 install:
   - pip install .
   - pip install -r requirements_dev.txt
 script:
-  - python setup.py test
+  - pip install tox && tox
 deploy:
   - provider: pypi
     user: cleardataeng

@@ -1,12 +1,6 @@
 #!/usr/bin/env python
 from setuptools import setup, find_packages
 
-with open('VERSION') as version_file:
-    version = version_file.read().strip()
-
-with open('seshypy/version.py', 'w') as f:
-    f.write("VERSION = '%s'\n" % version)
-
 with open('README.rst') as readme_file:
     readme = readme_file.read()
 
@@ -22,7 +16,7 @@ install_requires = [
 
 setup(
     name='seshypy',
-    version=version,
+    version='0.6.0',
     description='seshypy makes API Gateway requests and API Gateway clients easy.',
     long_description=readme,
     packages=find_packages(),

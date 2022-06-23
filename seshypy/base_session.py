@@ -1,10 +1,8 @@
 import inspect
 import logging
 try:
-    from urllib.parse import urlencode
     from urllib.parse import urljoin
 except ImportError:  # Python 2
-    from urllib import urlencode
     from urlparse import urljoin
 
 import requests

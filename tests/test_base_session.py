@@ -1,9 +1,9 @@
 import json
-import pytest
 import os
 import sys
 import unittest
 
+import pytest
 from freezegun import freeze_time
 
 from seshypy.base_session import BaseSession
@@ -50,7 +50,11 @@ class TestBaseSession(unittest.TestCase):
             got = json.loads(res.content)
         else:
             got = json.loads(res.content.decode())
-        got.pop('origin', None)
+
+        del got['origin']
+        del got['headers']['User-Agent']
+        del got['headers']['X-Amzn-Trace-Id']
+
         assert got == want
 
 

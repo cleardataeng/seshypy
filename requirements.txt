@@ -1,4 +1,4 @@
-requests-sigv4==0.1.0
+requests-sigv4==0.1.6
 boto3==1.9.102
 cachetools==2.0.1
 figgypy==1.1.7

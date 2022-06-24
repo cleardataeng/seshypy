@@ -5,7 +5,7 @@ with open('README.rst') as readme_file:
     readme = readme_file.read()
 
 install_requires = [
-    'requests-sigv4>=0.1.4',
+    'requests-sigv4>=0.1.6',
     'cachetools>=1.1.6',
     'figgypy>=0.2.0',
     'future',
@@ -34,5 +34,6 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
     ],
 )
